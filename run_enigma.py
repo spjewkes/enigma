@@ -182,9 +182,8 @@ if __name__ == "__main__":
     reflect_b = Reflector("Reflector B", "YRUHQSLDPXNGOKMIEBFZCWVJAT")
     reflect_c = Reflector("Reflector C", "FVPJIAOYEDRZXWGCTKUQSBNMHL")
 
-    # plugboard = PlugBoard("bq cr di ej kw mt os px uz gh")
     plugboard = PlugBoard("")
 
-    enigma = Enigma(rotor_3, rotor_2, rotor_1, "AAA", "AAA", reflect_b, plugboard)
+    enigma = Enigma(rotor_3, rotor_2, rotor_1, "AAA", "BBB", reflect_b, plugboard)
 
     print(enigma.encode(args.text))
