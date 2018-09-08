@@ -56,13 +56,11 @@ class Rotor(object):
 
     def forward_mapping(self, char):
         # Convert to index 0-25 and read mapping char at this location
-        # return self.mapping[(Rotor._stoi(char) + self._position + self._ring) % 26]
-        return Rotor._itos(Rotor._stoi(self.mapping[(Rotor._stoi(char) + self._position + self._ring) % 26]) - self._position - self._ring)
+        return Rotor._itos(Rotor._stoi(self.mapping[(Rotor._stoi(char) + self._position - self._ring) % 26]) - self._position + self._ring)
 
     def reverse_mapping(self, char):
         # Find the position of the char in mapping at return its index position as a char
-        # return Rotor._itos(self.mapping.index(char) - self._position - self._ring)
-        return Rotor._itos(self.mapping.index(Rotor._itos(Rotor._stoi(char) + self._position + self._ring)) - self._position - self._ring)
+        return Rotor._itos(self.mapping.index(Rotor._itos(Rotor._stoi(char) + self._position - self._ring)) - self._position + self._ring)
 
 class Reflector(object):
     def __init__(self, name, mapping):
@@ -122,6 +120,7 @@ class Enigma(object):
 
     def _encode(self, c):
         # print("Start char: {}".format(c))
+
         enc_c = self._plugboard.mapping(c)
         # print("Plugboard mapping: {}".format(enc_c))
 
@@ -186,6 +185,6 @@ if __name__ == "__main__":
     # plugboard = PlugBoard("bq cr di ej kw mt os px uz gh")
     plugboard = PlugBoard("")
 
-    enigma = Enigma(rotor_3, rotor_2, rotor_1, "AAA", "BAA", reflect_b, plugboard)
+    enigma = Enigma(rotor_3, rotor_2, rotor_1, "AAA", "AAA", reflect_b, plugboard)
 
     print(enigma.encode(args.text))
